@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.creatTable('users', {
+    await queryInterface.createTable('users', {
       id:{
         allowNull: false,
         autoIncrement: true,
@@ -21,7 +21,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      imae: {
+      image: {
         type: Sequelize.STRING
       },
     });
