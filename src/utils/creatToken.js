@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken');
 
+const secret = process.env.JWT_SECRET || 'suaSenhaSecreta';
+
 const creatToken = (id) => {
   const requiredForToekn = { id };
   const token = jwt.sign(
     requiredForToekn,
-    'nescaumelhorquetoddy',
+     secret,
     {
       expiresIn: '7d',
       algorithm: 'HS256',
@@ -13,4 +15,4 @@ const creatToken = (id) => {
   return token;
 };
 
-module.exports = creatToken;
+module.exports = { creatToken };

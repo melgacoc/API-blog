@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv/config');
 
-const secret = process.env.JWT_SECRET || 'nescaumelhorquetoddy';
+const secret = process.env.JWT_SECRET || 'suaSenhaSecreta';
 
 const validateJWT = async (req, res, next) => {
   const token = req.header('Authorization');
