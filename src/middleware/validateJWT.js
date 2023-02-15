@@ -10,7 +10,6 @@ const validateJWT = async (req, res, next) => {
   console.log(token);
   if (!token) {
     return res.status(401).json({ message: 'Token not found' });
-    // o erro era o ''erro:''
   }
 
   try {

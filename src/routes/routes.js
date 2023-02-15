@@ -10,5 +10,6 @@ const router = Router();
 router.post('/login', logInValidation, LogInController.logIn);
 router.post('/user', userValidation, UserController.addNewUser);
 router.get('/user', validateJWT, UserController.getAllUsers);
+router.get('/user/:id', validateJWT, UserController.getUserById);
 
 module.exports = router;
