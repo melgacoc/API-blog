@@ -1,4 +1,5 @@
 const PostService = require('../services/postService');
+const { validCreator, validPost } = require('../validations/creatorValidation');
 
 const getAll = async (_req, res) => {
     const posts = await PostService.getAll();
@@ -14,7 +15,21 @@ const getPostById = async (req, res) => {
     return res.status(200).json(post);
 };
 
+const attPost = async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+
+    validCreator(req, res);
+    validPost(req, res);
+    const { type, message } = await PostService.attPost(
+        id, title, content, 
+    );
+    if (type === 404) return res.status(type).json({ message });
+    return res.status(200).json(message);
+};
+
 module.exports = {
     getAll,
     getPostById,
+    attPost,
 };
