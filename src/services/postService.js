@@ -29,9 +29,13 @@ const attPost = async (id, title, content) => {
     return post;
 };
 
+const deletePost = async (id) => {
+    await BlogPost.destroy({ where: { id } });
+};
 
 module.exports = {
     getAll,
     getPostById,
     attPost,
+    deletePost,
 };

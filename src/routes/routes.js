@@ -20,5 +20,6 @@ router.get('/user', validateJWT, UserController.getAllUsers);
 router.get('/categories', validateJWT, CategoriesController.getAll);
 router.get('/post', validateJWT, PostController.getAll);
 router.delete('/user/:id', validateJWT, UserController.deleteUser);
+router.delete('/post/:id', validateJWT, PostController.deletePost);
 
 module.exports = router;

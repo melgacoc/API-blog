@@ -32,4 +32,5 @@ module.exports = {
     addNewUser,
     getAllUsers,
     getUserById,
+    deleteUser,
 };

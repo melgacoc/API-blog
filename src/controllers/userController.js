@@ -26,7 +26,7 @@ const getUserById = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     const { id } = req.params;
-    const user = await UserService.getUserById(id);
+    await UserService.getUserById(id);
     return res.status(204).end();
 };
 
