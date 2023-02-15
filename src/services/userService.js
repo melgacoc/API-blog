@@ -1,9 +1,12 @@
-const User = require('../models/User');
+const { User } = require('../models');
 const { creatToken } = require('../utils/creatToken');
 
 const addNewUser = async (displayName, email, password, image) => {
     const user = await User.findOne({ where: { email } });
-    if (user) return { type: 409, message: 'User already registered' };
+    console.log(user);
+    if (user) {
+        return { type: 409, message: 'User already registered' };
+    } 
     
     const newUser = await User.create({ displayName, email, password, image });
     const requiredForToken = { id: newUser.id };
