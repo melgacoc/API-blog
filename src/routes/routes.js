@@ -2,6 +2,7 @@ const { Router } = require('express');
 const LogInController = require('../controllers/logInController');
 const UserController = require('../controllers/userController');
 const CategoriesController = require('../controllers/categoriesController');
+const PostController = require('../controllers/postController');
 // const { categoryValidation } = require('../validations/categoriesValidation');
 const { logInValidation } = require('../validations/logInValidation');
 const { userValidation } = require('../validations/userValidation');
@@ -15,5 +16,6 @@ router.post('/categories', validateJWT, CategoriesController.addNewCategory);
 router.get('/user', validateJWT, UserController.getAllUsers);
 router.get('/user/:id', validateJWT, UserController.getUserById);
 router.get('/categories', validateJWT, CategoriesController.getAll);
+router.get('/post', validateJWT, PostController.getAll);
 
 module.exports = router;
