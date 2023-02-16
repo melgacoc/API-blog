@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET || 'suaSenhaSecreta';
 
 const creatToken = (id) => {
-  const requiredForToekn = { id };
+ // const requiredForToekn = { id };
   const token = jwt.sign(
-    requiredForToekn,
+     id,
      secret,
     {
       expiresIn: '7d',

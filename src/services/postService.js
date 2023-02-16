@@ -1,6 +1,7 @@
 const { BlogPost } = require('../models');
 const { User } = require('../models');
 const { Category } = require('../models');
+const { PostCategory } = require('../models');
 
 const getAll = async () => {
     const posts = await BlogPost.findAll({
@@ -23,9 +24,37 @@ const getPostById = async (id) => {
     return post;
 };
 
+const formatPost = (obj) => ({
+    id: obj.id,
+    title: obj.title,
+    content: obj.content,
+    userId: obj.userId,
+    updated: obj.updated,
+    published: obj.published,
+  });
+  
+  const addNewPost = async ({ title, content, categoryIds }, id) => {
+    // const user = jwt.verify(token, secret)
+  
+    const newPost = await BlogPost.create({
+      title, content, categoryId: categoryIds, userId: id,
+    });
+  
+    const formatedPost = formatPost(newPost);
+    
+    await categoryIds.map((element) => PostCategory.create({
+      postId: formatedPost.id, categoryId: element,
+    }));
+  
+    return formatedPost;
+  };
+
 const attPost = async (id, title, content) => {
     await BlogPost.update({ title, content }, { where: { id } });
     const post = await getPostById(id);
+    console.log(4);
+    console.log(post);
+    console.log(5);
     return post;
 };
 
@@ -38,4 +67,5 @@ module.exports = {
     getPostById,
     attPost,
     deletePost,
+    addNewPost,
 };

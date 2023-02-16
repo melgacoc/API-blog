@@ -1,5 +1,6 @@
 const PostService = require('../services/postService');
 const { validCreator, validPost } = require('../validations/creatorValidation');
+const { Category } = require('../models');
 
 const getAll = async (_req, res) => {
     const posts = await PostService.getAll();
@@ -15,8 +16,25 @@ const getPostById = async (req, res) => {
     return res.status(200).json(post);
 };
 
+const addNewPost = async (req, res) => { // peguei a ideia que vi de um colega e adaptei pro meu tipo de validação
+  const { id } = req.user;
+  const { title, content, categoryIds } = req.body;
+  const verifyCategory = await Category.findAll({ where: { id: categoryIds } });
+
+  if (!title || !content || !categoryIds) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+  }
+
+  if (verifyCategory.length < categoryIds.length) {
+    return res.status(400).json({ message: 'one or more "categoryIds" not found' });
+  }
+
+  const newPost = await PostService.addNewPost(req.body, id);
+  return res.status(201).json(newPost);
+};
+
 const attPost = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.user; // preciso receber do token
     const { title, content } = req.body;
 
     validCreator(req, res);
@@ -40,4 +58,5 @@ module.exports = {
     getPostById,
     attPost,
     deletePost,
+    addNewPost,
 };

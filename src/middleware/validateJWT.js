@@ -7,7 +7,7 @@ const secret = process.env.JWT_SECRET || 'suaSenhaSecreta';
 
 const validateJWT = async (req, res, next) => {
   const token = req.headers.authorization;
-  console.log(token);
+
   if (!token) {
     return res.status(401).json({ message: 'Token not found' });
   }
@@ -15,6 +15,7 @@ const validateJWT = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, secret);
     const validToken = await User.findOne({ where: { id: decoded.id } });
+
     req.user = validToken;
     next();
   } catch (err) {
