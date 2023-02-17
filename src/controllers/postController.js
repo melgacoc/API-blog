@@ -4,7 +4,6 @@ const { BlogPost } = require('../models');
 
 const getAll = async (_req, res) => {
     const posts = await PostService.getAll();
-    console.log(posts);
     return res.status(200).json(posts);
 };
 
@@ -52,7 +51,16 @@ const attPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-    const { id } = req.params;
+    const {
+        params: { id },
+        // user: { id: tokenId },
+      } = req;
+    
+    const findPostById = await PostService.getPostById(id);
+    if (!findPostById) {
+        return res.status(404).json({ message: 'Post does not exist' });
+    }
+    
     await PostService.deletePost(id);
     return res.status(204).end();
 };
