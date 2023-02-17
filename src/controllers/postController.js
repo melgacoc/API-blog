@@ -1,9 +1,10 @@
 const PostService = require('../services/postService');
-const { validCreator, validPost } = require('../validations/creatorValidation');
 const { Category } = require('../models');
+const { BlogPost } = require('../models');
 
 const getAll = async (_req, res) => {
     const posts = await PostService.getAll();
+    console.log(posts);
     return res.status(200).json(posts);
 };
 
@@ -36,19 +37,22 @@ const addNewPost = async (req, res) => { // peguei a ideia que vi de um colega e
 const attPost = async (req, res) => {
     const { id } = req.user; // preciso receber do token
     const { title, content } = req.body;
+    const verifyId = await BlogPost.findAll({ where: { userId: id } });
 
-    validCreator(req, res);
-    validPost(req, res);
-    const { type, message } = await PostService.attPost(
-        id, title, content, 
-    );
-    if (type === 404) return res.status(type).json({ message });
-    return res.status(200).json(message);
+    if (!verifyId) {
+        return res.status(401).json({ message: 'Unauthorized user' });
+    }
+
+    if (!title || !content) {
+        return res.status(400).json({ message: 'Some required fields are missing' });
+    }
+
+    const newPost = await PostService.attPost(id, title, content);
+    return res.status(200).json(newPost);
 };
 
 const deletePost = async (req, res) => {
     const { id } = req.params;
-    // validCreator(req, res);
     await PostService.deletePost(id);
     return res.status(204).end();
 };

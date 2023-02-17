@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const PostService = require('../services/postService');
 
 require('dotenv/config');
 
@@ -23,4 +24,20 @@ const validateJWT = async (req, res, next) => {
   }
 };
 
-module.exports = validateJWT;
+const validateUserId = async (req, res, next) => {
+  const { id } = req.params;
+  const token = req.headers.authorization;
+  const decoded = jwt.verify(token, secret);
+  const findPost = await PostService.getPostById(id);
+  const { userId } = findPost;
+
+  if (userId !== decoded.id) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
+  next();
+};
+
+module.exports = { 
+  validateJWT,
+  validateUserId,
+};

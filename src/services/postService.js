@@ -52,9 +52,6 @@ const formatPost = (obj) => ({
 const attPost = async (id, title, content) => {
     await BlogPost.update({ title, content }, { where: { id } });
     const post = await getPostById(id);
-    console.log(4);
-    console.log(post);
-    console.log(5);
     return post;
 };
 
