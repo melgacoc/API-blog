@@ -48,7 +48,7 @@ const attPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
     const { id } = req.params;
-    validCreator(req, res);
+    // validCreator(req, res);
     await PostService.deletePost(id);
     return res.status(204).end();
 };
