@@ -1,13 +1,64 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Gerenciador de Blog
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+## Introdução
+API para gerenciamento de posts e usuários de um blog utilizando arquitetura MSC, ORM, sequelize, biblioteca JWT para gerenciamento de tokens
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+---
+
+## Funcionalidades:
+- Cadastrar usuários;
+- Criação, edição e exclusão de posts;
+- Validação de requisição e tokens;
+
+---
+
+## Tecnológias
+
+![Node Badge](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express Badge](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
+)
+![Docker Badge](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![MySQL Badge](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![Sequelize Badge](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+
+---
+
+## Instalação do projeto localmente
+
+1. No terminal, em um diretório de sua escolha, clonar o repositório:
+
+```
+git@github.com:melgacoc/22-projeto-blog-API.git
+```
+
+2. No repositório do projeto, instalar as dependências:
+
+```
+npm install
+```
+
+3. Após isso, subir os containers, se desejar:
+
+```
+docker-compose up -d --build
+```
+
+4. Se quiser rodar os testes, rodar o comando:
+
+```
+npm test
+```
+
+---
+
+## Testes
+Os testes foram desenvolvidos utilizando a biblioteca React Testing Library
+1. No terminal execute:
+
+```
+npm run test-coverage
+```
+
+---
+
+Developed by [Cláudio Melgaço](https://github.com/melgacoc) 2023
